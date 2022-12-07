@@ -7,9 +7,46 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:856794807639:android:9c9e178e6e833c3f129212",
+        "mobilesdk_app_id": "1:856794807639:android:87d6e03ff9aed79b129212",
         "android_client_info": {
-          "package_name": "com.example.dietationapp"
+          "package_name": "com.dietationapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856794807639-1livai0n8lldbdc3ulmrm38que5t7eee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dietationapp",
+            "certificate_hash": "3413c13fe29f2d1e1b6b8ed2b5fa7eaaa54e4f2c"
+          }
+        },
+        {
+          "client_id": "856794807639-soemt2tl4es2khgog8os4r3vn1cihnd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt3DJRuweEaxQS4Xttxk_dyJByujaH00Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856794807639-soemt2tl4es2khgog8os4r3vn1cihnd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856794807639:android:8be2b23b0cb58a2f129212",
+        "android_client_info": {
+          "package_name": "com.saluswellpatient"
         }
       },
       "oauth_client": [
