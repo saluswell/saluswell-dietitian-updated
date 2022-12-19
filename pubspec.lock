@@ -970,21 +970,21 @@ packages:
       name: zego_express_engine
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.23.0"
+    version: "3.0.3"
   zego_uikit:
     dependency: transitive
     description:
       name: zego_uikit
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.0"
+    version: "1.7.3"
   zego_uikit_prebuilt_call:
     dependency: "direct main"
     description:
       name: zego_uikit_prebuilt_call
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.10"
+    version: "1.2.13"
 sdks:
   dart: ">=2.17.6 <3.0.0"
   flutter: ">=3.0.0"

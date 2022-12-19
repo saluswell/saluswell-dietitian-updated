@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dietationapp/common/helperFunctions/getUserIDhelper.dart';
 import 'package:dietationapp/common/helperFunctions/showsnackbar.dart';
 import 'package:dietationapp/common/helperFunctions/storage_services.dart';
@@ -17,7 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
 import '../../../common/helperFunctions/commonMethods.dart';
 import '../../../common/helperFunctions/hive_local_storage.dart';
 import '../../../common/helperFunctions/navigatorHelper.dart';
@@ -170,7 +168,7 @@ class AuthProvider extends ChangeNotifier {
           }).whenComplete(() {
             toRemoveAll(
                 context: navstate.currentState!.context,
-                widget: BottomNavScreen());
+                widget: LoginScreen());
             showSnackBarMessage(
                 backgroundcolor: AppColors.whitecolor,
                 contentColor: AppColors.blackcolor,
