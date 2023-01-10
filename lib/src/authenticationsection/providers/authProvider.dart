@@ -31,6 +31,19 @@ class AuthProvider extends ChangeNotifier {
   bool isLoading = false;
   File? profileImage;
   var profileImageurlVar;
+  String? seletedType;
+  List<String> recordvarList = [
+    'Register As',
+    // 'Due Date',
+    'Dietitian',
+    'Fitness Trainer',
+    'Nurse Practitioner'
+  ];
+
+  updateRecordVarValue(val) {
+    seletedType = val;
+    notifyListeners();
+  }
 
   makeLoadingTrue() {
     isLoading = true;
@@ -75,12 +88,12 @@ class AuthProvider extends ChangeNotifier {
   /// professional information controllers
 
   TextEditingController professionalIDNumberController =
-  TextEditingController();
+      TextEditingController();
   TextEditingController QualficationsController = TextEditingController();
   TextEditingController yearsOfExperienceController = TextEditingController();
   TextEditingController areaOfFocusController = TextEditingController();
   TextEditingController professionalApproachController =
-  TextEditingController();
+      TextEditingController();
   TextEditingController languageSpokenController = TextEditingController();
 
   /// login screen controllers
@@ -99,8 +112,8 @@ class AuthProvider extends ChangeNotifier {
       ///This will allow user to register in firebase
       return await authServices
           .registerUser(
-          email: emailController.text.trim(),
-          password: passwordController.text)
+              email: emailController.text.trim(),
+              password: passwordController.text)
           .then((value) async {
         userServices.createUser(UserModel(
           userId: getUserID(),
@@ -119,7 +132,7 @@ class AuthProvider extends ChangeNotifier {
               wantToAchieveList: [],
               weight: ""),
           personalInformationModel: PersonalInformationModel(
-              title: titleController.text,
+              title: seletedType.toString(),
               firstName: firstNameController.text,
               lastName: lastNameController.text,
               userId: getUserID(),
@@ -167,14 +180,14 @@ class AuthProvider extends ChangeNotifier {
             //   toNext(context: context, widget: ResendEmailScreen());
           }).whenComplete(() {
             toRemoveAll(
-                context: navstate.currentState!.context,
-                widget: LoginScreen());
+                context: navstate.currentState!.context, widget: LoginScreen());
             showSnackBarMessage(
                 backgroundcolor: AppColors.whitecolor,
                 contentColor: AppColors.blackcolor,
                 context: navstate.currentState!.context,
-                content: "Account Created Successfully");
+                content: "Account Created Successfully! Now Login");
           });
+          clearAllControllers();
         }
       });
     } on FirebaseAuthException catch (e) {
@@ -202,14 +215,42 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  clearAllControllers() {
+    userNameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    confirmPasswordController.clear();
+    seletedType = null;
+    titleController.clear();
+    firstNameController.clear();
+    lastNameController.clear();
+    mobileNumberController.clear();
+    bussinessContactController.clear();
+    addressController.clear();
+    cityController.clear();
+    zipPostalCodeController.clear();
+    provinceController.clear();
+    coutryController.clear();
+    branchNameController.clear();
+    accountNumberController.clear();
+    accountTypeController.clear();
+    transitNumberController.clear();
+    finincalInstutuionnumber.clear();
+    professionalApproachController.clear();
+    QualficationsController.clear();
+    yearsOfExperienceController.clear();
+    areaOfFocusController.clear();
+    languageSpokenController.clear();
+  }
+
   loginUser() async {
     makeLoadingTrue();
     try {
       ///This will allow user to authenticate in firebase
       return await authServices
           .loginUser(
-          email: emailController.text.trim(),
-          password: passwordController.text)
+              email: emailController.text.trim(),
+              password: passwordController.text)
           .whenComplete(() => makeLoadingFalse())
           .then((firebaseUser) async {
         authServices
@@ -218,7 +259,7 @@ class AuthProvider extends ChangeNotifier {
             .then((userData) async {
           print(userData.toJson('docID'));
           Provider.of<UserProvider>(navstate.currentState!.context,
-              listen: false)
+                  listen: false)
               .saveUserDetails(userData);
 
           //  await UserLoginStateHandler.saveUserLoggedInSharedPreference(true);
@@ -277,7 +318,7 @@ class AuthProvider extends ChangeNotifier {
           await showSnackBarMessage(
               context: navstate.currentState!.context,
               content:
-              "Password reset link send to your  entered email! make sure also to check spam folder");
+                  "Password reset link send to your  entered email! make sure also to check spam folder");
         });
       } else {
         showSnackBarMessage(

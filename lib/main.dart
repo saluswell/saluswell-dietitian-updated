@@ -1,5 +1,5 @@
-
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:dietationapp/src/apppointmentsSection/providers/appointmentProvider.dart';
 import 'package:dietationapp/src/authenticationsection/providers/authProvider.dart';
 import 'package:dietationapp/src/authenticationsection/providers/savUserDetailsProvider.dart';
@@ -21,6 +21,7 @@ import 'package:dietationapp/src/resourcesSection/healthTipsSection/providers/re
 import 'package:dietationapp/src/reviewsSection/providers/review_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
@@ -37,9 +38,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     body: message.data['body'].toString(),
   );
 }
-
-
-
 
 Future<void> createNotification(
     {required String title, required String body}) async {
@@ -70,11 +68,9 @@ Future<void> main() async {
   ).then((value) => print(value));
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  runApp(const MyApp());
+  runApp(DevicePreview(
+      enabled: !kReleaseMode, builder: (context) => const MyApp()));
 }
-
-
-
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -162,6 +158,7 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             navigatorKey: navstate,
+            builder: DevicePreview.appBuilder,
             theme: AppTheme.themeData,
             routes: {
               LoginScreen.routeName: (context) => LoginScreen(),
@@ -169,7 +166,6 @@ class _MyAppState extends State<MyApp> {
                   const CreateAccountScreen(),
               HomeScreen.routeName: (context) => const HomeScreen(),
               BottomNavScreen.routeName: (context) => const BottomNavScreen(),
-
               OnBoardingScreenOne.routeName: (context) =>
                   const OnBoardingScreenOne(),
               OnBoardingScreenTwo.routeName: (context) =>

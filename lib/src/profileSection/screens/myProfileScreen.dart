@@ -6,11 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../common/utils/themes.dart';
+import '../../../common/widgets/cacheNetworkImageWidget.dart';
 import '../../../res.dart';
+import '../../authenticationsection/Models/userModel.dart';
 import 'myProfileTab/aboutTab.dart';
 
 class MyProfileScreen extends StatefulWidget {
-  const MyProfileScreen({Key? key}) : super(key: key);
+  final UserModel userModel;
+
+  const MyProfileScreen({Key? key, required this.userModel}) : super(key: key);
 
   @override
   State<MyProfileScreen> createState() => _MyProfileScreenState();
@@ -26,14 +30,14 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           children: [
             Container(
               height: 200,
-              width: 400,
+              //  width: 400,
               decoration: const BoxDecoration(
                   color: AppColors.appcolor,
                   borderRadius: const BorderRadius.only(
                       bottomLeft: const Radius.circular(25),
                       bottomRight: const Radius.circular(25))),
               child: Padding(
-                padding: const EdgeInsets.only(top: 45),
+                padding: const EdgeInsets.only(top: 30),
                 child: Column(
                   children: [
                     Align(
@@ -68,15 +72,22 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         ),
                       ),
                     ),
-                    Container(
-                      height: 75,
-                      width: 75,
-                      child: Image.asset(
-                        Res.articelsImagepng,
-                        height: 170,
-                        width: 170,
-                      ),
-                    ),
+                    widget.userModel.profilePicture == null
+                        ? Container(
+                            height: 70,
+                            width: 80,
+                            decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(Res.articelsImagepng)),
+                                borderRadius: BorderRadius.circular(13)),
+                          )
+                        : CacheNetworkImageWidget(
+                            height: 80,
+                            width: 90,
+                            imgUrl: widget.userModel.profilePicture.toString(),
+                            radius: 7,
+                          ),
                     const SizedBox(
                       height: 5,
                     ),
@@ -118,7 +129,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Dr. Irfa Nadeem",
+                        "Dr  " + widget.userModel.userName.toString(),
                         style: fontW5S12(context)!.copyWith(
                             fontSize: 16,
                             color: AppColors.blackcolor,
@@ -128,7 +139,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         height: 5,
                       ),
                       Text(
-                        "Sohaibjameel3@gmail.com",
+                        widget.userModel.emailAdress.toString(),
                         style: fontW5S12(context)!.copyWith(
                             fontSize: 11,
                             color: AppColors.blackcolor.withOpacity(0.6),
@@ -138,7 +149,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         height: 5,
                       ),
                       Text(
-                        "Neutrition",
+                        widget.userModel.personalInformationModel!.title
+                            .toString(),
                         style: fontW5S12(context)!.copyWith(
                             fontSize: 12,
                             color: AppColors.appcolor,
@@ -201,10 +213,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     text: "About",
                   )
                 ]),
-            const Expanded(
+             Expanded(
               child: TabBarView(children: [
                 ReviewListTabScreen(),
-                AboutUserProfileTabScreen()
+                AboutUserProfileTabScreen(userModel: widget.userModel,)
               ]),
             )
           ],

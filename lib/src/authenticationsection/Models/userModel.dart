@@ -28,8 +28,7 @@ class UserModel {
       this.patientQuestionareModel,
       this.personalInformationModel,
       this.professionalInformationModel,
-      this.bankingInformationModel
-      });
+      this.bankingInformationModel});
 
   String? userId;
   String? userName;

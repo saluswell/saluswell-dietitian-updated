@@ -92,11 +92,10 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                                 BorderRadius.circular(13)),
                                       )
                                     : CacheNetworkImageWidget(
-                                      height: 50,
-                                      width: 60,
+                                        height: 50,
+                                        width: 60,
                                         imgUrl: model.profilePicture.toString(),
                                         radius: 7,
-                                        
                                       ),
                                 // InkWell(
                                 //   child: Container(
@@ -148,10 +147,8 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                       userId: model.userId.toString(),
                                       userName: model.userName.toString(),
                                       userEmail: model.emailAdress.toString(),
-
                                       firebaseimage:
                                           model.profilePicture.toString(),
-
                                     ));
                               },
                               child: Container(
@@ -191,7 +188,9 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                         ontap: () {
                           toNext(
                               context: context,
-                              widget: const MyProfileScreen());
+                              widget: MyProfileScreen(
+                                userModel: model,
+                              ));
                         },
                       ),
                       const SizedBox(

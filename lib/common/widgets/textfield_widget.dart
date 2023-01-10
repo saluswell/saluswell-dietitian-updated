@@ -55,14 +55,21 @@ class TextFieldWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(9),
           ),
           child: TextFormField(
-            enableInteractiveSelection: true,
+            // enableInteractiveSelection: true,
 
             scrollController: scrollController,
+            //   autofillHints: true,
+            //     autofillHints: ,
+            autocorrect: true,
 
-            enableSuggestions: true,
-            enableIMEPersonalizedLearning: true,
+            // enableSuggestions: true,
+            // enableIMEPersonalizedLearning: true,
             autofocus: false,
+            autovalidateMode: AutovalidateMode.always,
             maxLength: maxLengt,
+            enableInteractiveSelection: true,
+            enableIMEPersonalizedLearning: false,
+            enableSuggestions: true,
 
             enabled: enabled,
             style: const TextStyle(
